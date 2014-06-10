@@ -25,6 +25,11 @@ app.post('/', function(req, res) {
   }
 });
 
+app.get('/', function(req, res) {
+  var answer = answers[Math.floor(Math.random() * answers.length)];
+  res.end(answer);
+});
+
 var server = app.listen(config.server.port, function() {
     console.log('Listening on port %d', server.address().port);
 });
