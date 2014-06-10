@@ -20,7 +20,7 @@ app.post('/', function(req, res) {
       "icon_emoji": ":8ball:"
     };
 
-    request.post({url: config.slack.baseURL + '/services/hooks/incoming-webhook?token=' + config.slack.token, body: JSON.stringify(payload)}, function(err,response,body){});
+    request.post({url: config.slack.baseURL + '/services/hooks/incoming-webhook?token=' + config.slack.token, body: JSON.stringify(options)}, function(err,response,body){});
     res.send(200);
   }
 });
