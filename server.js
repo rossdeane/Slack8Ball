@@ -21,7 +21,7 @@ app.post('/', function(req, res) {
     };
 
     request.post({url: config.slack.baseURL + '/services/hooks/incoming-webhook?token=' + config.slack.token, body: JSON.stringify(options)}, function(err,response,body){});
-    res.send(200);
+    res.send("");
   }
 });
 
