@@ -34,7 +34,18 @@ app.post('/whelm', function(req, res) {
   }else{
     reply = createWhelms(whelms);
   }
-  res.send(reply);
+  
+  if(req.body.channel_name != "directmessage"){
+    var options = {
+      "channel": "#"+req.body.channel_name,
+      "username": "Whelmomter",
+      "text": reply,
+      "icon_emoji": ":bar_chart:"
+    };
+
+    request.post({url: config.slack.baseURL + '/services/hooks/incoming-webhook?token=' + config.slack.token, body: JSON.stringify(options)}, function(err,response,body){});
+  }
+  res.send("");
 
 });
 
@@ -49,7 +60,7 @@ var server = app.listen(config.server.port, function() {
 
 function createWhelms(whelms)
 {
-  var labels = ['Underwhelmed', 'Whelmed     ', 'Overwhelmed '];
+  var labels = ['Underwhelmed', '     Whelmed', ' Overwhelmed'];
   var meter = "```\n";
 
   for (var i = 8; i >= 0; i--) {
