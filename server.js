@@ -25,7 +25,7 @@ app.post('/', function(req, res) {
   }
 });
 
-app.get('/whelm', function(req, res) {
+app.post('/whelm', function(req, res) {
 
   var whelms = parseInt(req.body.text);
 
