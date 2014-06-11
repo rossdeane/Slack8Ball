@@ -38,7 +38,7 @@ app.post('/whelm', function(req, res) {
   if(req.body.channel_name != "directmessage"){
     var options = {
       "channel": "#"+req.body.channel_name,
-      "username": "Whelmomter",
+      "username": "Whelmometer",
       "text": reply,
       "icon_emoji": ":bar_chart:"
     };
