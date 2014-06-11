@@ -25,6 +25,19 @@ app.post('/', function(req, res) {
   }
 });
 
+app.get('/whelm', function(req, res) {
+
+  var whelms = parseInt(req.body.text);
+
+  if(isNaN(whelms)){
+    reply = "No whelms specified";
+  }else{
+    reply = createWhelms(whelms);
+  }
+  res.send(reply);
+
+});
+
 app.get('/', function(req, res) {
   var answer = answers[Math.floor(Math.random() * answers.length)];
   res.end(answer);
@@ -33,3 +46,26 @@ app.get('/', function(req, res) {
 var server = app.listen(config.server.port, function() {
     console.log('Listening on port %d', server.address().port);
 });
+
+function createWhelms(whelms)
+{
+  var labels = ['Underwhelmed', 'Whelmed     ', 'Overwhelmed '];
+  var meter = "```\n";
+
+  for (var i = 8; i >= 0; i--) {
+    var start = "            ";
+    if(i == 8) {
+      start = labels[2];
+    }else if(i == 4){
+      start = labels[1];
+    }else if(i === 0){
+      start = labels[0];
+    }
+
+    bar = (i < whelms)? "###" : "";
+
+    meter = meter + start + " - " + bar + "\n";
+  }
+  meter = meter + "```";
+  return meter;
+}
