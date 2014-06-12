@@ -50,7 +50,7 @@ app.post('/whelm', function(req, res) {
 });
 
 app.post('/coinflip', function(req, res) {
-  var sides = ['heads', 'tails'];
+  var sides = ['Heads', 'Tails'];
   var answer = sides[Math.round(Math.random() * 1)];
   
   if(req.body.channel_name != "directmessage"){
@@ -58,7 +58,7 @@ app.post('/coinflip', function(req, res) {
       "channel": "#"+req.body.channel_name,
       "username": "Coin Flip",
       "text": answer,
-      "icon_emoji": ":"+answer+":"
+      "icon_emoji": ":"+answer.toLowerCase()+":"
     };
 
     request.post({url: config.slack.baseURL + '/services/hooks/incoming-webhook?token=' + config.slack.token, body: JSON.stringify(options)}, function(err,response,body){});
