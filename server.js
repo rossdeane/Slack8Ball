@@ -49,6 +49,24 @@ app.post('/whelm', function(req, res) {
 
 });
 
+app.post('/coinflip', function(req, res) {
+  var sides = ['heads', 'tails'];
+  var answer = sides[Math.round(Math.random() * 1)];
+  
+  if(req.body.channel_name != "directmessage"){
+    var options = {
+      "channel": "#"+req.body.channel_name,
+      "username": "Coin Flip",
+      "text": answer,
+      "icon_emoji": ":"+answer+":"
+    };
+
+    request.post({url: config.slack.baseURL + '/services/hooks/incoming-webhook?token=' + config.slack.token, body: JSON.stringify(options)}, function(err,response,body){});
+  }
+  res.send("");
+
+});
+
 app.get('/', function(req, res) {
   var answer = answers[Math.floor(Math.random() * answers.length)];
   res.end(answer);
